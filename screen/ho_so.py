@@ -1,6 +1,8 @@
 import sys
 from PyQt5.QtWidgets import QDialog,QApplication, QWidget, QTableWidget, QTableWidgetItem, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 from PyQt5 import QtCore
+from data.hoso import HoSo
+from db.hoso import insert
 from db.sinhvien import delete, findAll
 class HoSoTable(QDialog):
     
@@ -209,17 +211,17 @@ class PersonalInfo(QDialog):
 
         #Tạo form nhập liệu
         form_layout = QVBoxLayout()
-        form_layout.addWidget(QLabel('Họ và tên'))
+        form_layout.addWidget(QLabel('Mã Hồ Sơ'))
         form_layout.addWidget(self.name_input)
-        form_layout.addWidget(QLabel('Mã Sinh Viên'))
+        form_layout.addWidget(QLabel('Họ và tên'))
         form_layout.addWidget(self.code_input)
         # form_layout.addWidget(QLabel('GPA'))
         # form_layout.addWidget(self.gpa_input)
-        form_layout.addWidget(QLabel('Giới tính'))
-        form_layout.addWidget(self.gender_input)
         form_layout.addWidget(QLabel('Ngày sinh'))
+        form_layout.addWidget(self.gender_input)
+        form_layout.addWidget(QLabel('Giới tính'))
         form_layout.addWidget(self.date_input)
-        form_layout.addWidget(QLabel('Lớp'))
+        form_layout.addWidget(QLabel('Địa chỉ'))
         form_layout.addWidget(self.class_input)
         # form_layout.addWidget(QLabel('Ngành'))
         # form_layout.addWidget(self.major_input)
@@ -251,27 +253,33 @@ class PersonalInfo(QDialog):
         lop = self.class_input.text()
         # major = self.major_input.text()
 
+        # Tạo 1 đối tượng và ép thành đối tượng HoSo
+        
         # Kiểm tra các giá trị nhập liệu
         if not name or not gender or not code or not date or not lop :
             QMessageBox.warning(self, 'Lỗi', 'Họ và tên, mã sinh viên, giới tính, ngày sinh, lớp, ngành là các trường bắt buộc')
             return
+        ho_so_new = HoSo(name,code,date,gender,lop)
+        success = insert(ho_so_new)
+        if success is None:
+            QMessageBox.warning(self, 'Lỗi', 'Thêm hồ sơ thất bại')
+        else:    
+            # Thêm dữ liệu vào bảng
+            row_count = self.parent().table.rowCount()
+            self.parent().table.insertRow(row_count)
+            self.parent().table.setItem(row_count, 0, QTableWidgetItem(name))
+            self.parent().table.setItem(row_count, 1, QTableWidgetItem(code))
+            # self.parent().table.setItem(row_count, 2, QTableWidgetItem(gpa))
+            self.parent().table.setItem(row_count, 2, QTableWidgetItem(gender))
+            self.parent().table.setItem(row_count, 3, QTableWidgetItem(date))
+            self.parent().table.setItem(row_count, 4, QTableWidgetItem(lop))
+            # self.parent().table.setItem(row_count, 5, QTableWidgetItem(major))
 
-        # Thêm dữ liệu vào bảng
-        row_count = self.parent().table.rowCount()
-        self.parent().table.insertRow(row_count)
-        self.parent().table.setItem(row_count, 0, QTableWidgetItem(name))
-        self.parent().table.setItem(row_count, 1, QTableWidgetItem(code))
-        # self.parent().table.setItem(row_count, 2, QTableWidgetItem(gpa))
-        self.parent().table.setItem(row_count, 2, QTableWidgetItem(gender))
-        self.parent().table.setItem(row_count, 3, QTableWidgetItem(date))
-        self.parent().table.setItem(row_count, 4, QTableWidgetItem(lop))
-        # self.parent().table.setItem(row_count, 5, QTableWidgetItem(major))
-
-        # Thêm dữ liệu vào danh sách
-        self.parent().data.append({"name":name,"code":code, "gender":gender, "date":date, "lop":lop})
-        
-        # Đóng class
-        self.close()
+            # Thêm dữ liệu vào danh sách
+            self.parent().data.append({"name":name,"code":code, "gender":gender, "date":date, "lop":lop})
+            
+            # Đóng class
+            self.close()
 
 class EditPersonalInfo(QDialog):
     def __init__(self,parent=None):
@@ -291,17 +299,17 @@ class EditPersonalInfo(QDialog):
 
         #Tạo form nhập liệu
         form_layout = QVBoxLayout()
-        form_layout.addWidget(QLabel('Họ và tên'))
-        form_layout.addWidget(self.name_input)
         form_layout.addWidget(QLabel('Mã Sinh Viên'))
+        form_layout.addWidget(self.name_input)
+        form_layout.addWidget(QLabel('Họ và tên'))
         form_layout.addWidget(self.code_input)
         # form_layout.addWidget(QLabel('GPA'))
         # form_layout.addWidget(self.gpa_input)
-        form_layout.addWidget(QLabel('Giới tính'))
-        form_layout.addWidget(self.gender_input)
         form_layout.addWidget(QLabel('Ngày sinh'))
+        form_layout.addWidget(self.gender_input)
+        form_layout.addWidget(QLabel('Giới tính'))
         form_layout.addWidget(self.date_input)
-        form_layout.addWidget(QLabel('Lớp'))
+        form_layout.addWidget(QLabel('Địa chỉ'))
         form_layout.addWidget(self.class_input)
         # form_layout.addWidget(QLabel('Ngành'))
         # form_layout.addWidget(self.major_input)

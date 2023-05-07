@@ -210,19 +210,19 @@ class PersonalInfo(QDialog):
 
         #Tạo form nhập liệu
         form_layout = QVBoxLayout()
-        form_layout.addWidget(QLabel('Họ và tên'))
-        form_layout.addWidget(self.name_input)
         form_layout.addWidget(QLabel('Mã Sinh Viên'))
+        form_layout.addWidget(self.name_input)
+        form_layout.addWidget(QLabel('Mã môn học'))
         form_layout.addWidget(self.code_input)
         # form_layout.addWidget(QLabel('GPA'))
         # form_layout.addWidget(self.gpa_input)
-        form_layout.addWidget(QLabel('Giới tính'))
+        form_layout.addWidget(QLabel('Điểm chuyên cần'))
         form_layout.addWidget(self.gender_input)
-        form_layout.addWidget(QLabel('Ngày sinh'))
+        form_layout.addWidget(QLabel('Điểm kiểm tra'))
         form_layout.addWidget(self.date_input)
-        form_layout.addWidget(QLabel('Lớp'))
+        form_layout.addWidget(QLabel('Điểm thực hành'))
         form_layout.addWidget(self.class_input)
-        form_layout.addWidget(QLabel('Ngành'))
+        form_layout.addWidget(QLabel('Điểm thi'))
         form_layout.addWidget(self.major_input)
         
         self.save = QPushButton('Thêm')
@@ -239,7 +239,7 @@ class PersonalInfo(QDialog):
 
         # Tùy chỉnh kích thước cho class
         self.setGeometry(300, 300, 300, 250)
-        self.setWindowTitle('Thông tin cá nhân')
+        self.setWindowTitle('Thông tin môn học')
         self.show()
 
     def save_info(self):
@@ -292,19 +292,19 @@ class EditPersonalInfo(QDialog):
 
         #Tạo form nhập liệu
         form_layout = QVBoxLayout()
-        form_layout.addWidget(QLabel('Họ và tên'))
-        form_layout.addWidget(self.name_input)
         form_layout.addWidget(QLabel('Mã Sinh Viên'))
+        form_layout.addWidget(self.name_input)
+        form_layout.addWidget(QLabel('Mã môn học'))
         form_layout.addWidget(self.code_input)
         # form_layout.addWidget(QLabel('GPA'))
         # form_layout.addWidget(self.gpa_input)
-        form_layout.addWidget(QLabel('Giới tính'))
+        form_layout.addWidget(QLabel('Điểm chuyên cần'))
         form_layout.addWidget(self.gender_input)
-        form_layout.addWidget(QLabel('Ngày sinh'))
+        form_layout.addWidget(QLabel('Điểm kiểm tra'))
         form_layout.addWidget(self.date_input)
-        form_layout.addWidget(QLabel('Lớp'))
+        form_layout.addWidget(QLabel('Điểm thực hành'))
         form_layout.addWidget(self.class_input)
-        form_layout.addWidget(QLabel('Ngành'))
+        form_layout.addWidget(QLabel('Điểm thi'))
         form_layout.addWidget(self.major_input)
         
         self.save = QPushButton('Lưu')
@@ -321,7 +321,7 @@ class EditPersonalInfo(QDialog):
         
         # Tùy chỉnh kích thước cho class
         self.setGeometry(300, 300, 300, 250)
-        self.setWindowTitle('Sửa thông tin cá nhân')
+        self.setWindowTitle('Sửa thông tin môn học')
         self.show()
         
         #
