@@ -1,5 +1,5 @@
 class SinhVien:
-    def __init__(self, ma, ten='', gioi_tinh='', ngay_sinh='', lop='', nganh='', ma_ho_so='', he_dao_tao = "Chính quy") -> None:
+    def __init__(self, ma, ten='', ngay_sinh='', gioi_tinh='', lop='', nganh='', ma_ho_so='', he_dao_tao = "Chính quy") -> None:
         self.ma = ma
         self.ten = ten
         self.gioi_tinh = gioi_tinh
