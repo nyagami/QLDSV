@@ -23,8 +23,11 @@ def update(sinhvien: SinhVien):
                 UPDATE Sinhvien SET lop = ?, WHERE ma = ?
             """
     conn = connect()
+    cursor = conn.cursor()
     try:
-        conn.execute(query)
+        cursor.execute(query, sinhvien.ma)
+        conn.commit()
+        conn.close()
     except DatabaseError as e:
         print(e)
         return None
