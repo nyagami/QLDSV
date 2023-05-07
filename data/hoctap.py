@@ -1,4 +1,4 @@
-class SinhVien:
+class HocTap:
     def __init__(self, ma_sinh_vien, ma_mon_hoc, diem_chuyen_can, diem_kiem_tra, diem_thuc_hanh, diem_thi) -> None:
         self.ma = ma_sinh_vien
         self.ma_mon_hoc = ma_mon_hoc
