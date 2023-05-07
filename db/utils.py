@@ -1,7 +1,7 @@
 import pyodbc
 from pyodbc import Connection
 
-Server = "GAMI\\CENTER"
+Server = "GAMI\\SERVER01"
 
 def connect() -> Connection:
     conn = pyodbc.connect("Driver={SQL Server};"
