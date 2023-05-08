@@ -38,7 +38,7 @@ def delete(hoso: HoSo):
 def insert(hoso: HoSo):
     conn = connect()
     cursor = conn.cursor()
-
+    
     query = "INSERT INTO Hoso (ma, ten, ngay_sinh, gioi_tinh, dia_chi) VALUES(?, ?, ?, ?, ?)"
     try:
         cursor.execute(query, hoso.ma, hoso.ten, hoso.ngay_sinh, hoso.gioi_tinh, hoso.dia_chi)
